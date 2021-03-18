@@ -26,7 +26,23 @@ int returnIndexH(int KernelIndex, int RowIndex, int ColumnIndex, int SizeOfMatri
 	}
 }
 
-
+void returnRowColumnIndices(int ListIndex, int SizeOfMatrix, int &RowIndex, int &ColumnIndex)
+{
+	int Length = 0; 
+	for (int i = 0; i < SizeOfMatrix-1; i++)
+	{
+		bool LowerBoundary = (ListIndex >= Length);
+		int DifferenceWithLowerBoundary = ListIndex - Length;
+		Length += SizeOfMatrix - i - 1;
+		bool UpperBoundary = (ListIndex <= Length);
+		if (LowerBoundary && UpperBoundary)
+		{
+			RowIndex = i;
+			ColumnIndex = DifferenceWithLowerBoundary + 1;
+			break;
+		}
+	}// After this loop, RowIndex, column always have a concrete value;
+}
 /*
 Stopwatch^ time1;
 time1 = Stopwatch::StartNew();
