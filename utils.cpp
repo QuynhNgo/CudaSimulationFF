@@ -48,3 +48,30 @@ double utils::stringtoDouble(std::string _Token)
     }
     return val;
 }
+
+void utils::printToFile(float * Host_CoactivationArray, int NumbEntriesOfARow, int TotalNumbEntries, std::string filename)
+{
+	std::ofstream Dev;
+	Dev.open(filename, std::ios::out); 
+	if (!Dev.good())
+	{
+		std::cerr << "Cannot write data to file." << std::endl;
+		exit(1);
+	}
+	int EntryIndex = 0;
+	while (EntryIndex < TotalNumbEntries)
+	{
+		if ((EntryIndex % NumbEntriesOfARow != 0) || (EntryIndex == 0))
+		{
+			Dev << Host_CoactivationArray[EntryIndex] << " ";
+			EntryIndex += 1;
+		}
+		else
+		{
+			Dev << std::endl;
+			Dev << Host_CoactivationArray[EntryIndex] << " ";
+			EntryIndex += 1;
+		}
+	}
+	Dev.close();
+}
